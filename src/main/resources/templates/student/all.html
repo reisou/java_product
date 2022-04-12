@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>学生一覧</title>
+</head>
+<body>
+	<a th:text="${title}"></a>
+	<table border="1" style="border-collapse:collapse">
+        <thead style="background:yellow">
+            <tr>
+                <td>学生番号</td>
+                <td>学生名前</td>
+                <td>学生年齢</td>
+                <td>学生成績</td>
+                <td>学生住所</td>
+                <td>学生クラス</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:if="${stu_list.size()} eq 0">
+                <td colspan="5">学生情報が存在しません。</td>
+            </tr>
+            <tr th:each="student:${stu_list}">
+                <td th:text="${student.id}"></td>
+                <td th:text="${student.name}"></td>
+                <td th:text="${student.age}"></td>
+                <td th:text="${student.score}"></td>
+                <td th:text="${student.address}"></td>
+                <td th:text="${student.stuClass}"></td>
+            </tr>
+        </tbody>
+    </table>
+    <p>学生成績max:<span th:text="${scoreMax}"></span></p>
+    <p>学生成績min:<span th:text="${scoreMin}"></span></p>
+</body>
+</html>

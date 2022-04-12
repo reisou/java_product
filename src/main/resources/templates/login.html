@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>登録画面</title>
+</head>
+<body>
+ <div style="text-align:center">
+ <h2>おはようございます！</h2>
+ <form name="loginForm" action="/signin" method="post" onsubmit="return check()">
+ <div>
+ ユーザーID：<input name="username" type="text"><br>
+ </div>
+ <div>
+ パスワード：<input name="password" type="password"><br>
+ </div>
+ <p>
+ <input type="submit" value="登録">
+ <input type="button" onclick="window.open('/register')" value="新規登録">
+ </p>
+ </form>
+ </div>
+</body>
+<script>
+function check(){
+var username = document.loginForm.username.value;
+var password = document.loginForm.password.value;
+if (username ==''|| password == ''){
+	window.alert('必須項目に未入力がありました');
+	return false;
+}else{
+	return ture;
+}
+}
+</script>
+</html>
