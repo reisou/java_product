@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>studentList</title>
+</head>
+<body>
+
+	<p align="center">
+		<Strong>Student Information Statistics</Strong><br>
+	</p>
+	
+	<form name="form1" onsubmit="return getStudent()" method="GET">
+		<p th:each="student:${student_list}" align="center">
+			studentName: 
+			<input type="text" th:name="student_name +${studentStat.index + 1}" th:value="${student.name}"> 
+				
+			studentClass: 
+			<input type="text" th:name="student_class +${studentStat.index + 1}" th:value="${student.stuClass}">
+				
+			studentAge: 
+			<input type="text" th:name="student_age +${studentStat.index + 1}" th:value="${student.age}">
+		</p>
+
+		<p align="center">
+		<input type="submit" value="send" >
+		</p>
+		
+	</form>
+
+	<p  align="center">
+		student age total is: <span name="ageSum"></span>
+	</p>
+
+	<p align="center">
+		student age max is: <span name="ageMax"></span>
+	</p>
+
+	<p align="center">
+		student age min is: <span name="ageMin"></span>
+	</p>
+
+</body>
+
+<script type="text/javascript">
+		class Student{
+			constructor(name,stu_class,age){
+				this.name = name;
+				this.stu_class = stu_class;
+				this.age = age;
+			}
+		}
+		function getStudent() {
+
+			var ageSum = 0;
+			var ageMax = 0;
+			console.log(parseInt(document.form1.student_age1.value));
+
+			student1 = new Student(document.form1.student_name1.value,document.form1.student_class1.value,document.form1.student_age1.value);
+			student2 = new Student(document.form1.student_name2.value,document.form1.student_class2.value,document.form1.student_age2.value);
+			student3 = new Student(document.form1.student_name3.value,document.form1.student_class3.value,document.form1.student_age3.value);
+			student4 = new Student(document.form1.student_name4.value,document.form1.student_class4.value,document.form1.student_age4.value);
+			student5 = new Student(document.form1.student_name5.value,document.form1.student_class5.value,document.form1.student_age5.value);
+
+			var stuList = [student1,student2,student3,student4,student5];
+			var ageMin = stuList[0].age;
+
+			console.log(stuList);
+
+			ageMax = stuList[0].age;
+			ageMin = stuList[0].age;
+
+			for(var i=0;i<stuList.length;i++){
+				ageSum += parseInt(stuList[i].age);
+
+				if(stuList[i].age > ageMax){
+					ageMax = stuList[i].age;
+
+				}else if(stuList[i].age < ageMin){
+					ageMin = stuList[i].age;
+				}
+			}
+			console.log(ageSum,ageMax,ageMin);
+
+			document.getElementsByName("ageSum")[0].innerText = ageSum;
+			document.getElementsByName("ageMax")[0].innerText = ageMax;
+			document.getElementsByName("ageMin")[0].innerText = ageMin;
+			return false;
+
+			// body...
+		}
+	</script>
+</html>

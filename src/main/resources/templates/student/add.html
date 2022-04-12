@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<title>学生</title>
+	<style>
+		span {
+			color: red;
+		}
+	</style>
+</head>
+
+<body>
+	<form name="addForm" action="/student/insert" method="post" onsubmit="return check()">
+		<span name="error"></span>
+		<div>
+			姓名:<input id="name" type="text" name="name" /><br>
+			<span name="nameError"></span>
+		</div>
+		<div>
+			年齢:<input id="age" type="text" name="age" /><br>
+			<span name="ageError"></span>
+		</div>
+		<div>
+			成績:<input id="score" type="text" name="score" /><br>
+			<span name="scoreError"></span>
+		</div>
+		<div>
+			住所:<input id="address" type="text" name="address" />
+		</div>
+		<div>
+			クラス:<input id="stuClass" type="text" name="stuClass" />
+		</div>
+		<input type="submit" value="学生新規登録">
+	</form>
+</body>
+<script>
+	function check() {
+		var isSumbit = true;
+		var name = document.addForm.name.value;
+		var age = document.addForm.age.value;
+		var score = document.addForm.score.value;
+
+		var nameError = '';
+		var ageError = '';
+		var scoreError = '';
+		if (name == '') {
+			nameError = '必須項目に未入力がありました';
+			//window.alert('必須項目に未入力がありました');
+			isSubmit = false;
+		}
+		if (age == '') {
+			ageError = '必須項目に未入力がありました';
+			//window.alert('必須項目に未入力がありました');
+			isSubmit = false;
+		}
+
+		if (name.match(/[^A-Za-z]+/)) {
+			//window.alert('文字以外が入力されています');
+			nameError = '文字以外が入力されています'
+			isSubmit = false;
+		}
+		if (age.match(/[^0-9]+/)) {
+			//window.alert('年齢数字以外が入力されています');
+			ageError = '年齢数字以外が入力されています';
+			isSubmit = false;
+		}
+		if (score.match(/[^0-9]+(\.?[0-9]+)?$/)) {
+			//window.alert('成績が違います');
+			scoreError = '成績が違います';
+			isSubmit = false;
+		}
+		if (score < 0 || score > 100) {
+			//alert('成績範囲が違います')
+			scoreError = '成績範囲が違います';
+			isSubmit = false;
+
+		}
+
+		document.getElementsByName("nameError")[0].innerText = nameError;
+		document.getElementsByName("ageError")[0].innerText = ageError;
+		document.getElementsByName("scoreError")[0].innerText = scoreError;
+		return isSubmit;
+	}
+</script>
+
+</html>
